@@ -70,7 +70,7 @@ function RequestPage() {
                     autoClose: 1000,
                 });
                 setTimeout(() => {
-                    window.location.href = 'https://t.me/+Vh0E5UsdRe0wMzMy';
+                    window.open('https://t.me/+Vh0E5UsdRe0wMzMy', '_blank');
                 }, 1000);
             }).catch((error) => {
                 console.log("Xatolik", error);
