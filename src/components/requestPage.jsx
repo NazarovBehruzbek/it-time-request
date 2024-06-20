@@ -84,7 +84,7 @@ function RequestPage() {
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
-                    <label htmlFor="name">Ismingiz?</label>
+                    <label htmlFor="name">Ismingiz</label>
                     <input
                         type="text"
                         id="name"
@@ -95,7 +95,7 @@ function RequestPage() {
                     {errors.name && <p className="error">{errors.name}</p>}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="username">Telegram Username bor bo'lsa?</label>
+                    <label htmlFor="username">Telegram Username</label>
                     <input
                         type="text"
                         id="username"
