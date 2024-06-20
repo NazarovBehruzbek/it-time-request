@@ -95,7 +95,7 @@ function RequestPage() {
                     {errors.name && <p className="error">{errors.name}</p>}
                 </div>
                 <div className="form-group">
-                    <label htmlFor="username">Telegram Username</label>
+                    <label htmlFor="username">Telegram username</label>
                     <input
                         type="text"
                         id="username"
@@ -105,7 +105,7 @@ function RequestPage() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="phone">Raqamingiz</label>
+                    <label htmlFor="phone">Telefon raqamingiz</label>
                     <input
                         type="tel"
                         id="phone"
