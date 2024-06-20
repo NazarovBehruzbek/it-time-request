@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import './styleRequest.css'; 
+import './styleRequest.css';
 import logo from '../assets/LOGO6666.png';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Modal } from 'antd';
 
 function RequestPage() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('+998 ');
     const [username, setUsername] = useState('');
     const [errors, setErrors] = useState({});
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [open, setOpen] = React.useState(false);
     const formatPhoneNumber = (value) => {
         let digits = value.replace(/\D/g, '');
         if (digits.startsWith('998')) {
@@ -42,19 +42,19 @@ function RequestPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-    
+
         const validationErrors = validateForm();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             setLoading(false);
         } else {
             setErrors({});
-    
+
             const token = "7207834215:AAGpiV02gcPvk86_lLkfEoc9eC7TQuFoYZE";
-            const chat_id =  -4253120413;
+            const chat_id = -4253120413;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
             const messageContent = `Ismi: ${name} \nUsername: ${username} \nTelefon: ${phone}`;
-    
+
             axios({
                 url: url,
                 method: 'POST',
@@ -66,12 +66,7 @@ function RequestPage() {
                 setName('');
                 setUsername('');
                 setPhone('');
-                toast.success('Ariza muvaffaqiyatli yuborildi!', {
-                    autoClose: 1000,
-                });
-                setTimeout(() => {
-                    window.open('https://t.me/+Vh0E5UsdRe0wMzMy', '_blank');
-                }, 1000);
+                setOpen(true)
             }).catch((error) => {
                 console.log("Xatolik", error);
             }).finally(() => {
@@ -79,14 +74,13 @@ function RequestPage() {
             });
         }
     };
-    
+
 
     return (
         <div className="app">
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
                 <h1 className="header-title">Ariza qoldiring</h1>
-                <a href="https://t.me/+Xw6_HVByaZdmNDcy">Test</a>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
@@ -121,8 +115,22 @@ function RequestPage() {
                     />
                     {errors.phone && <p className="error">{errors.phone}</p>}
                 </div>
-                <button type="submit" disabled={loading}>{loading?"Yuborilmoqda":"Yuborish"}</button>
+                <button type="submit" disabled={loading}>{loading ? "Yuborilmoqda" : "Yuborish"}</button>
             </form>
+            <Modal
+                width={500}
+                title={null}
+                footer={
+                  null
+                }
+                loading={loading}
+                open={open}
+                onCancel={() => setOpen(false)}
+            >
+                <h2 className='modal-title'>Arizangiz yuborildi</h2>
+                <h3 className='modal-text'>Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling</h3>
+                <button className='modal-btn'><a href="https://t.me/+Vh0E5UsdRe0wMzMy" target='_blank'>Guruhga qo'shilish</a></button>
+            </Modal>
         </div>
     );
 }

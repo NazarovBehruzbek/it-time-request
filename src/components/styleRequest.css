@@ -66,3 +66,34 @@
     color: red;
     margin-top:15px
   }
+  .modal-title{
+    text-align: center;
+    margin-top: 15px;
+  }
+  .modal-text{
+    display: flex;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    width: 90%;
+  }
+  .modal-btn{
+    display: flex;
+    margin: 20px auto;
+    border: none;
+    a{
+      text-decoration: none;
+      color:white;
+    }
+  }
+  @media screen and (max-width:600px) {
+    .header {
+        padding: 15px;
+      } 
+      .modal-title{
+        margin-top: 5px;
+      }
+      .modal-text{
+        margin-top: 10px;
+      }
+  }
