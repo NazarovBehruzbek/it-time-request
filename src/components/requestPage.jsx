@@ -86,6 +86,7 @@ function RequestPage() {
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
                 <h1 className="header-title">Ariza qoldiring</h1>
+                <a href="https://t.me/+Xw6_HVByaZdmNDcy">Test</a>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
