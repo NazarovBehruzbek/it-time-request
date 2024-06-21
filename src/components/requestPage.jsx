@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styleRequest.css';
 import logo from '../assets/LOGO6666.png';
 import axios from 'axios';
-import { Modal } from 'antd';
+import { Modal, Radio } from 'antd';
 
 function RequestPage() {
     const [name, setName] = useState('');
@@ -11,6 +11,10 @@ function RequestPage() {
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = React.useState(false);
+    const [value, setValue] = useState(1);
+    const onChange = (e) => {
+        setValue(e.target.value);
+      };
     const formatPhoneNumber = (value) => {
         let digits = value.replace(/\D/g, '');
         if (digits.startsWith('998')) {
@@ -53,7 +57,7 @@ function RequestPage() {
             const token = "7207834215:AAGpiV02gcPvk86_lLkfEoc9eC7TQuFoYZE";
             const chat_id = -4253120413;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
-            const messageContent = `Ismi: ${name} \nUsername: ${username} \nTelefon: ${phone}`;
+            const messageContent = `${value==1?"#offline":"#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone}`;
 
             axios({
                 url: url,
@@ -80,7 +84,7 @@ function RequestPage() {
         <div className="app">
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
-                <h1 className="header-title">Ariza qoldiring</h1>
+                <p className="header-title">Bizning kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
@@ -115,14 +119,22 @@ function RequestPage() {
                     />
                     {errors.phone && <p className="error">{errors.phone}</p>}
                 </div>
+                <div className="form-group">
+                    <p className='radio-text'>Bizning kursimiz Toshkent shaharda joylashgan. Agar aniq kelib o’qiy olsangiz, Toshkentni belgilang.</p>
+                    <Radio.Group onChange={onChange} value={value}>
+                        <Radio value={1}>Toshkentga bora olaman</Radio>
+                        <Radio value={2}>Onlayn</Radio>
+                    </Radio.Group>
+                </div>
                 <button type="submit" disabled={loading}>{loading ? "Yuborilmoqda" : "Yuborish"}</button>
             </form>
             <Modal
                 width={500}
                 title={null}
                 footer={
-                  null
+                    null
                 }
+                closable={false}
                 loading={loading}
                 open={open}
                 onCancel={() => setOpen(false)}
