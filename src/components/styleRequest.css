@@ -92,7 +92,7 @@
     margin-bottom: 15px;
     line-height: 20px;
   }
-  :where(.css-dev-only-do-not-override-m4timi).ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+   .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
     border-color: rgba(255, 0, 0, 0.619);
     background-color: rgba(255, 0, 0, 0.619);
 }
