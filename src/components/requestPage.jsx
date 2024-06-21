@@ -138,10 +138,10 @@ function RequestPage() {
                 loading={loading}
                 open={open}
                 onCancel={() => setOpen(false)}
-            >
+            > 
                 <h2 className='modal-title'>Arizangiz yuborildi</h2>
                 <h3 className='modal-text'>Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling</h3>
-                <button className='modal-btn'><a href="https://t.me/+Vh0E5UsdRe0wMzMy" target='_blank'>Guruhga qo'shilish</a></button>
+                <button className='modal-btn'><a href="https://t.me/+ly8CGpImOdJmZDRi" target='_blank'>Guruhga qo'shilish</a></button>
             </Modal>
         </div>
     );
