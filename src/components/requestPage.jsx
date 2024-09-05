@@ -2,19 +2,22 @@ import React, { useState } from 'react';
 import './styleRequest.css';
 import logo from '../assets/LOGO6666.png';
 import axios from 'axios';
-import { Modal, Radio } from 'antd';
+import { Modal, Radio, Checkbox } from 'antd';
 
 function RequestPage() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('+998');
     const [username, setUsername] = useState('');
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false)
-    const [open, setOpen] = React.useState(false);
+    const [loading, setLoading] = useState(false);
+    const [open, setOpen] = useState(false);
     const [value, setValue] = useState(1);
+    const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
+  
     const onChange = (e) => {
         setValue(e.target.value);
-      };
+    };
+
     const formatPhoneNumber = (value) => {
         let digits = value.replace(/\D/g, '');
         if (digits.startsWith('998')) {
@@ -40,7 +43,12 @@ function RequestPage() {
         const newErrors = {};
         if (!name) newErrors.name = 'Ismingiz kerak';
         if (!phone || phone.length !== 13) newErrors.phone = 'Raqam toʻliq kiritilmagan';
+        if (selectedTimeSlots.length === 0) newErrors.timeslot = 'Kamida bitta vaqt oralig’i tanlanishi kerak';
         return newErrors;
+    };
+
+    const handleTimeSlotChange = (checkedValues) => {
+        setSelectedTimeSlots(checkedValues);
     };
 
     const handleSubmit = (e) => {
@@ -57,20 +65,22 @@ function RequestPage() {
             const token = "7207834215:AAGpiV02gcPvk86_lLkfEoc9eC7TQuFoYZE";
             const chat_id = -1002239718403;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
-            const messageContent = `${value==1?"#offline":"#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone}`;
+            const timeSlotsText = selectedTimeSlots.join(', ');
+            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
 
             axios({
                 url: url,
                 method: 'POST',
                 data: {
                     "chat_id": chat_id,
-                    "text": messageContent 
+                    "text": messageContent
                 }
             }).then((res) => {
                 setName('');
                 setUsername('');
                 setPhone('');
-                setOpen(true)
+                setSelectedTimeSlots([]);
+                setOpen(true);
             }).catch((error) => {
                 console.log("Xatolik", error);
             }).finally(() => {
@@ -79,6 +89,12 @@ function RequestPage() {
         }
     };
 
+    const timeOptions = [
+        { label: '10:00 - 12:00', value: '10:12' },
+        { label: '15:00 - 17:00', value: '15:17' },
+        { label: '17:00 - 19:00', value: '17:19' },
+        { label: '19:00 - 21:00', value: '19:21' }
+    ];
 
     return (
         <div className="app">
@@ -94,6 +110,7 @@ function RequestPage() {
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        placeholder='Ismingizni kiriting'
                         required
                     />
                     {errors.name && <p className="error">{errors.name}</p>}
@@ -105,6 +122,7 @@ function RequestPage() {
                         id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        placeholder='Telegram username'
                         required
                     />
                 </div>
@@ -126,16 +144,22 @@ function RequestPage() {
                         <Radio value={2}>Onlayn</Radio>
                     </Radio.Group>
                 </div>
+                <div className="form-group">
+                    <label style={{fontSize:'15px'}}>Qaysi vaqtda qatnasha olasiz?</label>
+                    <Checkbox.Group
+                        options={timeOptions}
+                        value={selectedTimeSlots}
+                        onChange={handleTimeSlotChange}
+                    />
+                    {errors.timeslot && <p className="error">{errors.timeslot}</p>}
+                </div>
                 <button type="submit" disabled={loading}>{loading ? "Yuborilmoqda" : "Yuborish"}</button>
             </form>
             <Modal
                 width={500}
                 title={null}
-                footer={
-                    null
-                }
+                footer={null}
                 closable={false}
-                loading={loading}
                 open={open}
                 onCancel={() => setOpen(false)}
             > 
