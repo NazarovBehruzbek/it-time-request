@@ -6,7 +6,7 @@ import { Modal, Radio } from 'antd';
 
 function RequestPage() {
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('+998 ');
+    const [phone, setPhone] = useState('+998');
     const [username, setUsername] = useState('');
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false)
@@ -20,11 +20,11 @@ function RequestPage() {
         if (digits.startsWith('998')) {
             digits = digits.slice(3);
         }
-        let formatted = '+998 ';
+        let formatted = '+998';
         if (digits.length > 0) formatted += digits.substring(0, 2);
-        if (digits.length > 2) formatted += ' ' + digits.substring(2, 5);
-        if (digits.length > 5) formatted += ' ' + digits.substring(5, 7);
-        if (digits.length > 7) formatted += ' ' + digits.substring(7, 9);
+        if (digits.length > 2) formatted += '' + digits.substring(2, 5);
+        if (digits.length > 5) formatted += '' + digits.substring(5, 7);
+        if (digits.length > 7) formatted += '' + digits.substring(7, 9);
 
         return formatted;
     };
@@ -39,7 +39,7 @@ function RequestPage() {
     const validateForm = () => {
         const newErrors = {};
         if (!name) newErrors.name = 'Ismingiz kerak';
-        if (!phone || phone.length !== 17) newErrors.phone = 'Raqam toʻliq kiritilmagan';
+        if (!phone || phone.length !== 13) newErrors.phone = 'Raqam toʻliq kiritilmagan';
         return newErrors;
     };
 
@@ -64,7 +64,7 @@ function RequestPage() {
                 method: 'POST',
                 data: {
                     "chat_id": chat_id,
-                    "text": messageContentgit 
+                    "text": messageContent 
                 }
             }).then((res) => {
                 setName('');
