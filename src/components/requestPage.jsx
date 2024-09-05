@@ -64,7 +64,7 @@ function RequestPage() {
                 method: 'POST',
                 data: {
                     "chat_id": chat_id,
-                    "text": messageContent
+                    "text": messageContentgit 
                 }
             }).then((res) => {
                 setName('');
