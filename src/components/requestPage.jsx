@@ -161,7 +161,7 @@ function RequestPage() {
                 footer={null}
                 closable={false}
                 open={open}
-                onCancel={() => setOpen(false)}
+                onCancel={() => setOpen(true)}
             > 
                 <h2 className='modal-title'>Tez orada sizga aloqaga chiqamiz 🙂</h2>
                 <p className='modal-text'>Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling</p>
