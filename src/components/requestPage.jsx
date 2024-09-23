@@ -165,7 +165,7 @@ function RequestPage() {
             > 
                 <h2 className='modal-title'>Tez orada sizga aloqaga chiqamiz 🙂</h2>
                 <p className='modal-text'>Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling</p>
-                <button className='modal-btn'><a href="https://t.me/+xyf59YedFEs5NzQy" target='_blank'>Guruhga qo'shilish</a></button>
+                <button className='modal-btn'><a href="https://t.me/it_time" target='_blank'>Guruhga qo'shilish</a></button>
             </Modal>
         </div>
     );
