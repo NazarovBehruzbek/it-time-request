@@ -90,7 +90,6 @@ function Kiberxavfsizlik() {
     };
 
     const timeOptions = [
-        { label: '17:00 - 19:00', value: '17:00 - 19:00' },
         { label: '19:00 - 21:00', value: '19:00 - 21:00' }
     ];
 
