@@ -5,7 +5,7 @@ import logoImg from "../../assets/logo.png"
 import Travel from "../contact/Travel"
 import "./app.scss"
 
-function Limsa() {
+function NewTravel() {
 
   return (
     <div className="app">
@@ -23,4 +23,4 @@ function Limsa() {
   )
 }
 
-export default Limsa
+export default NewTravel
