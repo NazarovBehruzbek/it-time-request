@@ -62,13 +62,11 @@ function School() {
             setLoading(false);
         } else {
             setErrors({});
-
             const token = "7207834215:AAGpiV02gcPvk86_lLkfEoc9eC7TQuFoYZE";
-            const chat_id = -1002239718403;
+            const chat_id = -4520864696;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
             const timeSlotsText = selectedTimeSlots.join(', ');
-            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nYoshi ${age} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
-
+            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nYoshi: ${age} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
             axios({
                 url: url,
                 method: 'POST',
