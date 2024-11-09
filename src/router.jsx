@@ -2,7 +2,7 @@ import {  createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Kiberxavfsizlik from './components/CyberSecurity';
 import Limsa from './components/App';
-import Travel from './components/contact/Travel'
+import NewTravel from './components/app/NewTravel'
 export const router = createBrowserRouter([
     {
         path:'/',
@@ -18,6 +18,6 @@ export const router = createBrowserRouter([
     },
     {
         path:"/travel",
-        element:<Travel/>
+        element:<NewTravel/>
     }
 ])
