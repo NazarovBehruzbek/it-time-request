@@ -7,7 +7,6 @@ import { Modal, Radio, Checkbox } from 'antd';
 function School() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('+998');
-    const [username, setUsername] = useState('');
     const [age, setAge] = useState('');
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -66,7 +65,7 @@ function School() {
             const chat_id = -4520864696;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
             const timeSlotsText = selectedTimeSlots.join(', ');
-            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nYoshi: ${age} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nTelefon: ${phone} \nYoshi: ${age} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
             axios({
                 url: url,
                 method: 'POST',
@@ -113,17 +112,7 @@ function School() {
                     />
                     {errors.name && <p className="error">{errors.name}</p>}
                 </div>
-                <div className="form-group">
-                    <label htmlFor="username">Telegram username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder='Telegram username'
-                        required
-                    />
-                </div>
+    
                 <div className="form-group">
                     <label htmlFor="phone">Telefon raqamingiz</label>
                     <input
