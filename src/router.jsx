@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import Kiberxavfsizlik from './components/CyberSecurity';
-import Limsa from './components/Limsa';
+import Limsa from './components/app/Limsa';
 import NewTravel from './components/app/NewTravel';
 
 export const router = createBrowserRouter([
