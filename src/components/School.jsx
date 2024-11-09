@@ -4,16 +4,17 @@ import logo from '../assets/LOGO6666.png';
 import axios from 'axios';
 import { Modal, Radio, Checkbox } from 'antd';
 
-function RequestPage() {
+function School() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('+998');
     const [username, setUsername] = useState('');
+    const [age, setAge] = useState('');
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(1);
     const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
-  
+
     const onChange = (e) => {
         setValue(e.target.value);
     };
@@ -66,7 +67,7 @@ function RequestPage() {
             const chat_id = -1002239718403;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
             const timeSlotsText = selectedTimeSlots.join(', ');
-            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nYoshi ${age} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
 
             axios({
                 url: url,
@@ -90,21 +91,20 @@ function RequestPage() {
     };
 
     const timeOptions = [
-        { label: '10:00 - 12:00', value: '10:00 - 12:00' },
-        { label: '15:00 - 17:00', value: '15:00 - 17:00' },
-        { label: '17:00 - 19:00', value: '17:00 - 19:00' },
-        { label: '19:00 - 21:00', value: '19:00 - 21:00' }
+        { label: 'Ertalab', value: 'Ertalab' },
+        { label: 'Abetdan keyin', value: 'Abetdan keyin' },
+        { label: 'Kechki', value: 'Kechki' }
     ];
 
     return (
         <div className="app">
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
-                <p className="header-title">Bizning manzil <strong>Toshkent</strong> shahrida  Bodomzor metro ro'parasida joylashgan kela olsangiz formani to'ldiring</p>
+                <p className="header-title">Bizning manzil <strong>Toshkent</strong> shahrida  Bodomzor &#x24C2; metro ro'parasida joylashgan kela olsangiz formani to'ldiring</p>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
-                    <label htmlFor="name">Ismingiz</label>
+                    <label htmlFor="name"> Farzandingizning ismi va familiyasi</label>
                     <input
                         type="text"
                         id="name"
@@ -138,14 +138,34 @@ function RequestPage() {
                     {errors.phone && <p className="error">{errors.phone}</p>}
                 </div>
                 <div className="form-group">
-                    <p className='radio-text'>Bizning kursimiz Toshkent shaharda joylashgan. Agar aniq kelib o’qiy olsangiz, Toshkentni belgilang.</p>
+                    <label htmlFor="age">Farzandingizni yoshi</label>
+                    <input
+                        type="number"
+                        id="age"
+                        value={age}
+                        onChange={(e) => {
+                            // Faqat 2 raqamli yosh kiritishga ruxsat beriladi
+                            if (e.target.value.length <= 2) {
+                                setAge(e.target.value);
+                            }
+                        }}
+                        required
+                        min={1}
+                        max={99} // maksimal yosh 99
+                        placeholder="Yoshingizni kiriting"
+                    />
+                    {errors.age && <p className="error">{errors.age}</p>}
+                </div>
+
+                <div className="form-group">
+                    <p className='radio-text'> Farzandingiz aniq kela oladimi?</p>
                     <Radio.Group onChange={onChange} value={value}>
-                        <Radio value={1}>Toshkentga bora olaman</Radio>
-                        <Radio value={2}>Onlayn</Radio>
+                        <Radio value={1}>Ha, bora oladi</Radio>
+                        <Radio value={2}>Onlayn kerak</Radio>
                     </Radio.Group>
                 </div>
                 <div className="form-group">
-                    <label style={{fontSize:'15px'}}>Qaysi vaqtda qatnasha olasiz?</label>
+                    <label style={{ fontSize: '15px' }}>Farzandingiz kursimizga qaysi vaqtlarda qatnasha oladi? </label>
                     <Checkbox.Group
                         options={timeOptions}
                         value={selectedTimeSlots}
@@ -162,7 +182,7 @@ function RequestPage() {
                 closable={false}
                 open={open}
                 onCancel={() => setOpen(true)}
-            > 
+            >
                 <h2 className='modal-title'>Tez orada sizga aloqaga chiqamiz 🙂</h2>
                 <p className='modal-text'>Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling</p>
                 <button className='modal-btn'><a href="https://t.me/it_time" target='_blank'>Guruhga qo'shilish</a></button>
@@ -171,4 +191,4 @@ function RequestPage() {
     );
 }
 
-export default RequestPage;
+export default School;
