@@ -75,7 +75,6 @@ function School() {
                 }
             }).then((res) => {
                 setName('');
-                setUsername('');
                 setPhone('');
                 setSelectedTimeSlots([]);
                 setOpen(true);
