@@ -4,7 +4,7 @@ import logo from '../assets/LOGO6666.png';
 import axios from 'axios';
 import { Modal, Radio, Checkbox } from 'antd';
 
-function RequestPage() {
+function SMM() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('+998');
     const [username, setUsername] = useState('');
@@ -13,7 +13,7 @@ function RequestPage() {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(1);
     const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
-    const sheetUrl='https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec'
+        const sheetUrl='https://script.google.com/macros/s/AKfycbwyQa5vzL5hmDf33NSOxguA1QeVNeIILnmX4_vrLcXaTtsi1G0sW2l570F3boKfD5DH/exec'
   
     const onChange = (e) => {
         setValue(e.target.value);
@@ -64,10 +64,10 @@ function RequestPage() {
             setErrors({});
 
             const token = "7207834215:AAGpiV02gcPvk86_lLkfEoc9eC7TQuFoYZE";
-            const chat_id = -1002239718403;
+            const chat_id = -1002486027239;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
             const timeSlotsText = selectedTimeSlots.join(', ');
-            const messageContent = `${value === 1 ? "#offline" : "#online"} \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+            const messageContent = `${value === 1 ? "#offline" : "#online"} \n#SMM \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
             const formData = {
                 name: name,
                 username: username,
@@ -91,6 +91,7 @@ function RequestPage() {
                 console.error('Error details:', error);
             })
 
+
             axios({
                 url: url,
                 method: 'POST',
@@ -103,7 +104,7 @@ function RequestPage() {
                 setUsername('');
                 setPhone('');
                 setSelectedTimeSlots([]);
-                // setOpen(true);
+                setOpen(true);
             }).catch((error) => {
                 console.log("Xatolik", error);
             }).finally(() => {
@@ -123,7 +124,7 @@ function RequestPage() {
         <div className="app">
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
-                <p className="header-title">Bizning manzil <strong>Toshkent</strong> shahrida  Bodomzor metro ro'parasida joylashgan kela olsangiz formani to'ldiring</p>
+                <p className="header-title">Bizning1 kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
@@ -194,4 +195,4 @@ function RequestPage() {
     );
 }
 
-export default RequestPage;
+export default SMM;

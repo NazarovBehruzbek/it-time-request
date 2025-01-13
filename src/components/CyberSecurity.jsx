@@ -13,6 +13,7 @@ function Kiberxavfsizlik() {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(1);
     const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
+        const sheetUrl='https://script.google.com/macros/s/AKfycbyKYKjGdsI3zFIcEMUXlvSDGyiMpCGs-ZUjkf8jjCZYFC_niPUOHvR0gd7my7RUsmE3/exec'
   
     const onChange = (e) => {
         setValue(e.target.value);
@@ -66,7 +67,30 @@ function Kiberxavfsizlik() {
             const chat_id = -1002486027239;
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
             const timeSlotsText = selectedTimeSlots.join(', ');
-            const messageContent = `${value === 1 ? "#offline" : "#online"} \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+            const messageContent = `${value === 1 ? "#offline" : "#online"} \n #Kiberxavfsizlik \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+            const formData = {
+                name: name,
+                username: username,
+                phone: phone,
+                timeSlots: timeSlotsText,
+                value: value === 1 ? "#offline" : "#online"
+            };
+            
+            const params = new URLSearchParams(formData).toString();
+            const urlWithParams = `${sheetUrl}?${params}`;
+            
+            fetch(urlWithParams, {
+                method: 'GET',
+                mode: 'no-cors',
+            })
+            .then(() => {
+                console.log('Request sent successfully');
+
+            })
+            .catch((error) => {
+                console.error('Error details:', error);
+            })
+
 
             axios({
                 url: url,
@@ -100,7 +124,7 @@ function Kiberxavfsizlik() {
         <div className="app">
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
-                <p className="header-title">Bizning kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
+                <p className="header-title">Bizning1 kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
