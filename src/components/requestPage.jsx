@@ -103,7 +103,7 @@ function RequestPage() {
                 setUsername('');
                 setPhone('');
                 setSelectedTimeSlots([]);
-                // setOpen(true);
+                setOpen(true);
             }).catch((error) => {
                 console.log("Xatolik", error);
             }).finally(() => {
