@@ -124,7 +124,7 @@ function Kiberxavfsizlik() {
         <div className="app">
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
-                <p className="header-title">Bizning1 kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
+                <p className="header-title">Bizning kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
@@ -189,7 +189,7 @@ function Kiberxavfsizlik() {
             > 
                 <h2 className='modal-title'>Tez orada sizga aloqaga chiqamiz 🙂</h2>
                 <p className='modal-text'>Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling</p>
-                <button className='modal-btn'><a href="https://t.me/it_time" target='_blank'>Guruhga qo'shilish</a></button>
+                <button onClick={() => window.location.href = 'https://t.me/it_time'} className='modal-btn'>Guruhga qo'shilish</button>
             </Modal>
         </div>
     );
