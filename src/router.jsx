@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: '/cyber',
+    path: '/smm',
     element: <Kiberxavfsizlik />,
   },
   {
