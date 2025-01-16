@@ -124,7 +124,7 @@ function SMM() {
         <div className="app">
             <header className="header">
                 <img src={logo} alt="IT TIME Academy" className="logo" />
-                <p className="header-title">Bizning1 kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
+                <p className="header-title">Bizning kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
             </header>
             <form onSubmit={handleSubmit} className="form" id='requestForm'>
                 <div className="form-group">
