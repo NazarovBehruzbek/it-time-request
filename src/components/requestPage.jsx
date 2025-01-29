@@ -84,16 +84,18 @@ function RequestPage() {
       const params = new URLSearchParams(formData).toString();
       const urlWithParams = `${sheetUrl}?${params}`;
 
-      fetch(urlWithParams, {
-        method: "GET",
-        mode: "no-cors",
-      })
-        .then(() => {
-          console.log("Request sent successfully");
+      if(value === 1) {
+        fetch(urlWithParams, {
+          method: "GET",
+          mode: "no-cors",
         })
-        .catch((error) => {
-          console.error("Error details:", error);
-        });
+          .then(() => {
+            console.log("Request sent successfully");
+          })
+          .catch((error) => {
+            console.error("Error details:", error);
+          });
+      }
 
       axios({
         url: url,
@@ -177,7 +179,7 @@ function RequestPage() {
           </p>
           <Radio.Group onChange={onChange} value={value}>
             <Radio value={1}>Toshkentga bora olaman</Radio>
-            <Radio value={2}>Onlayn</Radio>
+            <Radio value={0}>Onlayn</Radio>
           </Radio.Group>
         </div>
         <div className="form-group">
