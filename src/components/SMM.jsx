@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styleRequest.css';
 import logo from '../assets/LOGO6666.png';
 import axios from 'axios';
-import { Modal, Radio, Checkbox } from 'antd';
+import { Modal, Checkbox, Button } from 'antd';
 
 function SMM() {
     const [name, setName] = useState('');
@@ -11,13 +11,9 @@ function SMM() {
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(1);
+    const [announcementModal, setAnnouncementModal] = useState(true);
     const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
-        const sheetUrl='https://script.google.com/macros/s/AKfycbwyQa5vzL5hmDf33NSOxguA1QeVNeIILnmX4_vrLcXaTtsi1G0sW2l570F3boKfD5DH/exec'
-  
-    const onChange = (e) => {
-        setValue(e.target.value);
-    };
+    const sheetUrl='https://script.google.com/macros/s/AKfycbwyQa5vzL5hmDf33NSOxguA1QeVNeIILnmX4_vrLcXaTtsi1G0sW2l570F3boKfD5DH/exec'
 
     const formatPhoneNumber = (value) => {
         let digits = value.replace(/\D/g, '');
@@ -113,6 +109,15 @@ function SMM() {
         }
     };
 
+    const handleOnlineClick = () => {
+        window.open('https://t.me/it_time', '_blank');
+        setAnnouncementModal(false);
+    };
+
+    const handleOfflineClick = () => {
+        setAnnouncementModal(false);
+    };
+
     const timeOptions = [
         { label: '10:00 - 12:00', value: '10:00 - 12:00' },
         { label: '15:00 - 17:00', value: '15:00 - 17:00' },
@@ -121,71 +126,177 @@ function SMM() {
     ];
 
     return (
-        <div className="app">
-            <header className="header">
-                <img src={logo} alt="IT TIME Academy" className="logo" />
-                <p className="header-title">Bizning kurslar <strong>Toshkent</strong> shahrida kela olsangiz formani to'ldiring</p>
-            </header>
-            <form onSubmit={handleSubmit} className="form" id='requestForm'>
-                <div className="form-group">
-                    <label htmlFor="name">Ismingiz</label>
-                    <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder='Ismingizni kiriting'
-                        required
-                    />
-                    {errors.name && <p className="error">{errors.name}</p>}
-                </div>
-                <div className="form-group">
-                    <label htmlFor="username">Telegram username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        placeholder='Telegram username'
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="phone">Telefon raqamingiz</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        value={phone}
-                        onChange={handlePhoneChange}
-                        required
-                    />
-                    {errors.phone && <p className="error">{errors.phone}</p>}
-                </div>
-                <div className="form-group">
-                    <p className='radio-text'>Bizning kursimiz Toshkent shaharda joylashgan. Agar aniq kelib o’qiy olsangiz, Toshkentni belgilang.</p>
-                    <Radio.Group onChange={onChange} value={value}>
-                        <Radio value={1}>Toshkentga bora olaman</Radio>
-                        <Radio value={2}>Onlayn</Radio>
-                    </Radio.Group>
-                </div>
-                <div className="form-group">
-                    <label style={{fontSize:'15px'}}>Qaysi vaqtda qatnasha olasiz?</label>
-                    <Checkbox.Group
-                        options={timeOptions}
-                        value={selectedTimeSlots}
-                        onChange={handleTimeSlotChange}
-                    />
-                    {errors.timeslot && <p className="error">{errors.timeslot}</p>}
-                </div>
-                <button type="submit" disabled={loading}>{loading ? "Yuborilmoqda" : "Yuborish"}</button>
-            </form>
+        <div className="request-container">
+            {announcementModal ? (
+                <Modal
+                    title={null}
+                    open={announcementModal}
+                    closable={false}
+                    maskClosable={false}
+                    onCancel={null}
+                    footer={null}
+                    style={{ top: 0, padding:'0' }}
+                    width="100%"
+                    bodyStyle={{ 
+                        height: '100vh', 
+                        display: 'flex', 
+                        flexDirection: 'column', 
+                        justifyContent: 'center', 
+                        alignItems: 'center',
+                        background: 'linear-gradient(135deg, #1a237e 0%, #0d47a1 100%)'
+                    }}
+                >
+                    <div style={{ 
+                        textAlign: 'center', 
+                        marginBottom: '2rem',
+                        width: '100%',
+                        maxWidth: '800px',
+                        padding: '20px',
+                        color: 'white'
+                    }}>
+                        <h1 style={{ 
+                            fontSize: 'clamp(1.8rem, 4vw, 3rem)', 
+                            marginBottom: '1.5rem',
+                            fontWeight: 'bold',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                        }}>
+                            SMM kurslari boshlandi!
+                        </h1>
+                        <p style={{ 
+                            fontSize: 'clamp(1rem, 2vw, 1.4rem)', 
+                            marginBottom: '3rem',
+                            lineHeight: '1.6',
+                            opacity: '0.9'
+                        }}>
+                            Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat!<br/>
+                            Kurslarimiz offlayn tarzda va faqat Toshkent shahrida bo'ladi
+                        </p>
+                        <div style={{ 
+                            display: 'flex', 
+                            gap: 'clamp(1rem, 3vw, 2rem)', 
+                            justifyContent: 'center',
+                            flexWrap: 'wrap'
+                        }}>
+                            <Button 
+                                size="large" 
+                                onClick={handleOnlineClick}
+                                style={{
+                                    minWidth: '200px',
+                                    height: '50px',
+                                    fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+                                    fontWeight: 'bold',
+                                    background: 'rgba(255, 0, 0, 0.619)',
+                                    border: 'none',
+                                    borderRadius: '25px',
+                                    boxShadow: '0 4px 15px rgba(255, 0, 0, 0.3)',
+                                    transition: 'all 0.3s ease',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '10px',
+                                    color: 'white'
+                                }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.background = 'rgba(255, 0, 0, 0.8)';
+                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.background = 'rgba(255, 0, 0, 0.619)';
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                }}
+                            >
+                                Onlayn
+                            </Button>
+                            <Button 
+                                size="large" 
+                                onClick={handleOfflineClick}
+                                style={{
+                                    minWidth: '200px',
+                                    height: '50px',
+                                    fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+                                    fontWeight: 'bold',
+                                    background: 'rgba(255, 0, 0, 0.619)',
+                                    border: 'none',
+                                    borderRadius: '25px',
+                                    boxShadow: '0 4px 15px rgba(255, 0, 0, 0.3)',
+                                    transition: 'all 0.3s ease',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '10px',
+                                    color: 'white'
+                                }}
+                                onMouseOver={(e) => {
+                                    e.currentTarget.style.background = 'rgba(255, 0, 0, 0.8)';
+                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                }}
+                                onMouseOut={(e) => {
+                                    e.currentTarget.style.background = 'rgba(255, 0, 0, 0.619)';
+                                    e.currentTarget.style.transform = 'translateY(0)';
+                                }}
+                            >
+                                Offlayn
+                            </Button>
+                        </div>
+                    </div>
+                </Modal>
+            ) : (
+                <>
+                    <header className="header">
+                        <img src={logo} alt="IT TIME Academy" className="logo" />
+                        <p className="header-title">SMM kurslari boshlandi! Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat! Kurslarimiz <strong>offlayn</strong> tarzda va faqat <strong>Toshkent</strong> shahrida bo'ladi</p>
+                    </header>
+                    <form onSubmit={handleSubmit} className="form">
+                        <div className="form-group">
+                            <label htmlFor="name">Ismingiz</label>
+                            <input
+                                type="text"
+                                id="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={errors.name ? 'error' : ''}
+                            />
+                            {errors.name && <span className="error-message">{errors.name}</span>}
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="username">Telegram username</label>
+                            <input
+                                type="text"
+                                id="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="phone">Telefon raqamingiz</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                value={phone}
+                                onChange={handlePhoneChange}
+                                className={errors.phone ? 'error' : ''}
+                            />
+                            {errors.phone && <span className="error-message">{errors.phone}</span>}
+                        </div>
+                        <div className="form-group">
+                            <label>Qulay vaqt</label>
+                            <Checkbox.Group
+                                options={timeOptions}
+                                onChange={handleTimeSlotChange}
+                                className={errors.timeslot ? 'error' : ''}
+                            />
+                            {errors.timeslot && <span className="error-message">{errors.timeslot}</span>}
+                        </div>
+                        <button type="submit" disabled={loading}>{loading ? "Yuborilmoqda" : "Yuborish"}</button>
+                    </form>
+                </>
+            )}
             <Modal
-                width={500}
-                title={null}
-                footer={null}
-                closable={false}
+                title="Ro'yxatdan o'tish"
                 open={open}
-                onCancel={() => setOpen(true)}
+                onCancel={() => setOpen(false)}
+                footer={null}
             > 
                 <h2 className='modal-title'>Tez orada sizga aloqaga chiqamiz 🙂</h2>
                 <p className='modal-text'>Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling</p>
