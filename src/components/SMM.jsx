@@ -111,7 +111,6 @@ function SMM() {
 
     const handleOnlineClick = () => {
         window.open('https://t.me/it_time', '_blank');
-        setAnnouncementModal(false);
     };
 
     const handleOfflineClick = () => {
