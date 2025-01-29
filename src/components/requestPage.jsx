@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styleRequest.css";
 import logo from "../assets/LOGO6666.png";
 import axios from "axios";
-import { Modal, Radio, Checkbox } from "antd";
+import { Modal, Radio, Checkbox, Button } from "antd";
 
 function RequestPage() {
   const [name, setName] = useState("");
@@ -12,6 +12,7 @@ function RequestPage() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
+  const [announcementModal, setAnnouncementModal] = useState(true);
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
   const sheetUrl =
     "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
@@ -19,6 +20,15 @@ function RequestPage() {
   const onChange = (e) => {
     setValue(e.target.value);
   };
+
+  const handleOnlineClick = () => {
+    window.open("https://t.me/it_time", "_blank");
+  };
+
+  const handleOfflineClick = () => {
+    setAnnouncementModal(false);
+  };
+
 
   const formatPhoneNumber = (value) => {
     let digits = value.replace(/\D/g, "");
@@ -129,8 +139,133 @@ function RequestPage() {
   ];
 
   return (
-    <div className="app">
-      <header className="header">
+    <div className="request-container">
+       {announcementModal ? (
+        <Modal
+          title={null}
+          open={announcementModal}
+          closable={false}
+          maskClosable={false}
+          onCancel={null}
+          footer={null}
+          style={{ top: 0, padding: "0" }}
+          width="100%"
+          bodyStyle={{
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "linear-gradient(135deg, #1a237e 0%, #0d47a1 100%)",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              marginBottom: "2rem",
+              width: "100%",
+              maxWidth: "800px",
+              padding: "20px",
+              color: "white",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                marginBottom: "1.5rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+              }}
+            >
+              Frontend kurslari boshlandi!
+            </h1>
+            <p
+              style={{
+                fontSize: "clamp(1rem, 2vw, 1.4rem)",
+                marginBottom: "3rem",
+                lineHeight: "1.6",
+                opacity: "0.9",
+              }}
+            >
+              Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat! <br />
+              Bizda yangi guruhlarga qabul boshlandi.              <br />
+              Kurslarimiz offlayn tarzda va faqat Toshkent shahrida bo'ladi
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: "clamp(1rem, 3vw, 2rem)",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <Button
+                size="large"
+                onClick={handleOnlineClick}
+                style={{
+                  minWidth: "200px",
+                  height: "50px",
+                  fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
+                  fontWeight: "bold",
+                  background: "rgba(255, 0, 0, 0.619)",
+                  border: "none",
+                  borderRadius: "25px",
+                  boxShadow: "0 4px 15px rgba(255, 0, 0, 0.3)",
+                  transition: "all 0.3s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "10px",
+                  color: "white",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.8)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.619)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                Onlayn
+              </Button>
+              <Button
+                size="large"
+                onClick={handleOfflineClick}
+                style={{
+                  minWidth: "200px",
+                  height: "50px",
+                  fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
+                  fontWeight: "bold",
+                  background: "rgba(255, 0, 0, 0.619)",
+                  border: "none",
+                  borderRadius: "25px",
+                  boxShadow: "0 4px 15px rgba(255, 0, 0, 0.3)",
+                  transition: "all 0.3s ease",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  margin: "10px",
+                  color: "white",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.8)";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.619)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                Offlayn
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      ) : (
+        <>
+         <header className="header">
         <img src={logo} alt="IT TIME Academy" className="logo" />
         <p className="header-title">
           Bizning manzil <strong>Toshkent</strong> shahrida Bodomzor metro
@@ -197,7 +332,8 @@ function RequestPage() {
           {loading ? "Yuborilmoqda" : "Yuborish"}
         </button>
       </form>
-      <Modal
+        </>)}
+        <Modal
         width={520}
         title={null}
         footer={null}
@@ -234,6 +370,8 @@ function RequestPage() {
         </button>
       </Modal>
     </div>
+
+     
   );
 }
 

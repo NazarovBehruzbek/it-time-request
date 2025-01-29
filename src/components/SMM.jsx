@@ -177,7 +177,8 @@ function SMM() {
                 opacity: "0.9",
               }}
             >
-              Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat!
+              Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat! <br />
+              15:00 - 17:00 vaqt oralig'ida keloladiganlar forma to'ldiring.Darslar boshlangan guruhga qo'shilasizlar.
               <br />
               Kurslarimiz offlayn tarzda va faqat Toshkent shahrida bo'ladi
             </p>
