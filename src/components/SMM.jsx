@@ -178,7 +178,7 @@ function SMM() {
               }}
             >
               Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat! <br />
-              15:00 - 17:00 vaqt oralig'ida keloladiganlar forma to'ldiring.
+              SMM kursini o'qib yuqori daromad olish uchun hoziroq boshlang
               <br />
               Kurslarimiz offlayn tarzda va faqat Toshkent shahrida bo'ladi
             </p>
