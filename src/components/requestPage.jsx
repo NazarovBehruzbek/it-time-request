@@ -178,7 +178,7 @@ function RequestPage() {
                 letterSpacing: "1px",
               }}
             >
-              Frontend kurslari boshlandi!
+              IT kurslariga ro'yhatdan o'ting!
             </h1>
             <p
               style={{
