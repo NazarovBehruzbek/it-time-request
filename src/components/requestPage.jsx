@@ -54,6 +54,7 @@ function RequestPage() {
   const validateForm = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Ismingiz kerak";
+    if (!username) newErrors.username = "Telegram username kiriting"
     if (!phone || phone.length !== 13)
       newErrors.phone = "Raqam toʻliq kiritilmagan";
     if (selectedTimeSlots.length === 0)
@@ -283,7 +284,7 @@ function RequestPage() {
             placeholder="Ismingizni kiriting"
             required
           />
-          {errors.name && <p className="error">{errors.name}</p>}
+          {errors.name && <p className="error-message">{errors.name}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="username">Telegram username</label>
@@ -295,6 +296,7 @@ function RequestPage() {
             placeholder="Telegram username"
             required
           />
+          {errors.username && <p className="error-message">{errors.username}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="phone">Telefon raqamingiz</label>
@@ -326,7 +328,7 @@ function RequestPage() {
             value={selectedTimeSlots}
             onChange={handleTimeSlotChange}
           />
-          {errors.timeslot && <p className="error">{errors.timeslot}</p>}
+          {errors.timeslot && <p className="error-message">{errors.timeslot}</p>}
         </div>
         <button type="submit" disabled={loading}>
           {loading ? "Yuborilmoqda" : "Yuborish"}

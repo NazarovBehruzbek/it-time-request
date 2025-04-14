@@ -40,6 +40,7 @@ function SMM() {
   const validateForm = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Ismingiz kerak";
+    if (!username) newErrors.username = "Telegram username";
     if (!phone || phone.length !== 13)
       newErrors.phone = "Raqam toʻliq kiritilmagan";
     if (selectedTimeSlots.length === 0)
@@ -271,7 +272,6 @@ function SMM() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className={errors.name ? "error" : ""}
               />
               {errors.name && (
                 <span className="error-message">{errors.name}</span>
@@ -285,6 +285,9 @@ function SMM() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
+              {errors.username && (
+                <span className="error-message">{errors.username}</span>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="phone">Telefon raqamingiz</label>
@@ -293,7 +296,6 @@ function SMM() {
                 id="phone"
                 value={phone}
                 onChange={handlePhoneChange}
-                className={errors.phone ? "error" : ""}
               />
               {errors.phone && (
                 <span className="error-message">{errors.phone}</span>
