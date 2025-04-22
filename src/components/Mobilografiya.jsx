@@ -39,11 +39,26 @@ function Mobilograf() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!name) newErrors.name = "Ismingiz kerak";
-    if (!phone || phone.length !== 13)
+
+    if (!name) {
+      newErrors.name = "Ismingiz kerak";
+    }
+
+    if (!username) {
+      newErrors.username = "Telegram username kiriting";
+    } else if (username.length < 3) {
+      newErrors.username =
+        "Telegram username kamida 3 ta belgidan iborat bo'lishi kerak";
+    }
+
+    if (!phone || phone.length !== 13) {
       newErrors.phone = "Raqam toʻliq kiritilmagan";
-    if (selectedTimeSlots.length === 0)
+    }
+
+    if (selectedTimeSlots.length === 0) {
       newErrors.timeslot = "Kamida bitta vaqt oralig’i tanlanishi kerak";
+    }
+
     return newErrors;
   };
 
@@ -68,13 +83,16 @@ function Mobilograf() {
       const timeSlotsText = selectedTimeSlots.join(", ");
       const messageContent = `#Mobilografiya \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
 
-      fetch(sheetUrl,{
-        method:"POST",
+      fetch(sheetUrl, {
+        method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body:(`Name=${name}&Username=${username}&Phone=${phone}&Times=${timeSlotsText}`)
-      }).then(res=>res.text()).then(data=>{
-        console.log("Request sent successfully");
-      }).catch(error=>console.log(error))
+        body: `Name=${name}&Username=${username}&Phone=${phone}&Times=${timeSlotsText}`,
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          console.log("Request sent successfully");
+        })
+        .catch((error) => console.log(error));
 
       axios({
         url: url,
@@ -260,7 +278,6 @@ function Mobilograf() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className={errors.name ? "error" : ""}
               />
               {errors.name && (
                 <span className="error-message">{errors.name}</span>
@@ -274,6 +291,9 @@ function Mobilograf() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
+              {errors.username && (
+                <span className="error-message">{errors.username}</span>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="phone">Telefon raqamingiz</label>
@@ -282,7 +302,6 @@ function Mobilograf() {
                 id="phone"
                 value={phone}
                 onChange={handlePhoneChange}
-                className={errors.phone ? "error" : ""}
               />
               {errors.phone && (
                 <span className="error-message">{errors.phone}</span>

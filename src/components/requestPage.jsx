@@ -29,7 +29,6 @@ function RequestPage() {
     setAnnouncementModal(false);
   };
 
-
   const formatPhoneNumber = (value) => {
     let digits = value.replace(/\D/g, "");
     if (digits.startsWith("998")) {
@@ -54,7 +53,12 @@ function RequestPage() {
   const validateForm = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Ismingiz kerak";
-    if (!username) newErrors.username = "Telegram username kiriting"
+    if (!username) {
+      newErrors.username = "Telegram username kiriting";
+    } else if (username.length < 3) {
+      newErrors.username =
+        "Telegram username kamida 3 ta belgidan iborat bo'lishi kerak";
+    }
     if (!phone || phone.length !== 13)
       newErrors.phone = "Raqam toʻliq kiritilmagan";
     if (selectedTimeSlots.length === 0)
@@ -95,7 +99,7 @@ function RequestPage() {
       const params = new URLSearchParams(formData).toString();
       const urlWithParams = `${sheetUrl}?${params}`;
 
-      if(value === 1) {
+      if (value === 1) {
         fetch(urlWithParams, {
           method: "GET",
           mode: "no-cors",
@@ -141,7 +145,7 @@ function RequestPage() {
 
   return (
     <div className="request-container">
-       {announcementModal ? (
+      {announcementModal ? (
         <Modal
           title={null}
           open={announcementModal}
@@ -190,7 +194,7 @@ function RequestPage() {
               }}
             >
               Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat! <br />
-              Bizda yangi guruhlarga qabul boshlandi.              <br />
+              Bizda yangi guruhlarga qabul boshlandi. <br />
               Kurslarimiz offlayn tarzda va faqat Toshkent shahrida bo'ladi
             </p>
             <div
@@ -266,76 +270,81 @@ function RequestPage() {
         </Modal>
       ) : (
         <>
-         <header className="header">
-        <img src={logo} alt="IT TIME Academy" className="logo" />
-        <p className="header-title">
-          Bizning manzil <strong>Toshkent</strong> shahrida Bodomzor metro
-          ro'parasida joylashgan kela olsangiz formani to'ldiring
-        </p>
-      </header>
-      <form onSubmit={handleSubmit} className="form" id="requestForm">
-        <div className="form-group">
-          <label htmlFor="name">Ismingiz</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Ismingizni kiriting"
-            required
-          />
-          {errors.name && <p className="error-message">{errors.name}</p>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="username">Telegram username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Telegram username"
-            required
-          />
-          {errors.username && <p className="error-message">{errors.username}</p>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="phone">Telefon raqamingiz</label>
-          <input
-            type="tel"
-            id="phone"
-            value={phone}
-            onChange={handlePhoneChange}
-            required
-          />
-          {errors.phone && <p className="error">{errors.phone}</p>}
-        </div>
-        <div className="form-group">
-          <p className="radio-text">
-            Bizning kursimiz Toshkent shaharda joylashgan. Agar aniq kelib o’qiy
-            olsangiz, Toshkentni belgilang.
-          </p>
-          <Radio.Group onChange={onChange} value={value}>
-            <Radio value={1}>Toshkentga bora olaman</Radio>
-            <Radio value={0}>Onlayn</Radio>
-          </Radio.Group>
-        </div>
-        <div className="form-group">
-          <label style={{ fontSize: "15px" }}>
-            Qaysi vaqtda qatnasha olasiz?
-          </label>
-          <Checkbox.Group
-            options={timeOptions}
-            value={selectedTimeSlots}
-            onChange={handleTimeSlotChange}
-          />
-          {errors.timeslot && <p className="error-message">{errors.timeslot}</p>}
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? "Yuborilmoqda" : "Yuborish"}
-        </button>
-      </form>
-        </>)}
-        <Modal
+          <header className="header">
+            <img src={logo} alt="IT TIME Academy" className="logo" />
+            <p className="header-title">
+              Bizning manzil <strong>Toshkent</strong> shahrida Bodomzor metro
+              ro'parasida joylashgan kela olsangiz formani to'ldiring
+            </p>
+          </header>
+          <form onSubmit={handleSubmit} className="form" id="requestForm">
+            <div className="form-group">
+              <label htmlFor="name">Ismingiz</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Ismingizni kiriting"
+                required
+              />
+              {errors.name && <p className="error-message">{errors.name}</p>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="username">Telegram username</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Telegram username"
+                required
+              />
+              {errors.username && (
+                <p className="error-message">{errors.username}</p>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Telefon raqamingiz</label>
+              <input
+                type="tel"
+                id="phone"
+                value={phone}
+                onChange={handlePhoneChange}
+                required
+              />
+              {errors.phone && <p className="error">{errors.phone}</p>}
+            </div>
+            <div className="form-group">
+              <p className="radio-text">
+                Bizning kursimiz Toshkent shaharda joylashgan. Agar aniq kelib
+                o’qiy olsangiz, Toshkentni belgilang.
+              </p>
+              <Radio.Group onChange={onChange} value={value}>
+                <Radio value={1}>Toshkentga bora olaman</Radio>
+                <Radio value={0}>Onlayn</Radio>
+              </Radio.Group>
+            </div>
+            <div className="form-group">
+              <label style={{ fontSize: "15px" }}>
+                Qaysi vaqtda qatnasha olasiz?
+              </label>
+              <Checkbox.Group
+                options={timeOptions}
+                value={selectedTimeSlots}
+                onChange={handleTimeSlotChange}
+              />
+              {errors.timeslot && (
+                <p className="error-message">{errors.timeslot}</p>
+              )}
+            </div>
+            <button type="submit" disabled={loading}>
+              {loading ? "Yuborilmoqda" : "Yuborish"}
+            </button>
+          </form>
+        </>
+      )}
+      <Modal
         width={520}
         title={null}
         footer={null}
@@ -372,8 +381,6 @@ function RequestPage() {
         </button>
       </Modal>
     </div>
-
-     
   );
 }
 

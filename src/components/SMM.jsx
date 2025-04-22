@@ -40,7 +40,12 @@ function SMM() {
   const validateForm = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Ismingiz kerak";
-    if (!username) newErrors.username = "Telegram username";
+    if (!username) {
+      newErrors.username = "Telegram username kiriting";
+    } else if (username.length < 3) {
+      newErrors.username =
+        "Telegram username kamida 3 ta belgidan iborat bo'lishi kerak";
+    }
     if (!phone || phone.length !== 13)
       newErrors.phone = "Raqam toʻliq kiritilmagan";
     if (selectedTimeSlots.length === 0)
@@ -348,7 +353,11 @@ function SMM() {
         >
           Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling
         </p>
-        <button className='modal-btn'><a href="https://t.me/it_time" target='_blank'>Guruhga qo'shilish</a></button>
+        <button className="modal-btn">
+          <a href="https://t.me/it_time" target="_blank">
+            Guruhga qo'shilish
+          </a>
+        </button>
       </Modal>
     </div>
   );
