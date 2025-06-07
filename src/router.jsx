@@ -6,34 +6,39 @@ import NewTravel from './components/app/NewTravel';
 import School from './components/School';
 import SMM from './components/SMM';
 import Mobilograf from './components/Mobilografiya';
+import NewFormRequest from './components/NewFormRequest';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
   },
   {
-    path: '/cyber',
+    path: "/cyber",
     element: <Kiberxavfsizlik />,
   },
   {
-    path: '/smm',
+    path: "/smm",
     element: <SMM />,
   },
   {
-    path: '/mobilografiya',
+    path: "/mobilografiya",
     element: <Mobilograf />,
   },
   {
-    path: '/limsa',
+    path: "/limsa",
     element: <Limsa />,
   },
   {
-    path: '/travel',
+    path: "/travel",
     element: <NewTravel />,
   },
   {
-    path: '/school',
-    element: <School/>
-  }
+    path: "/school",
+    element: <School />,
+  },
+  {
+    path: "/newForm",
+    element: <NewFormRequest />,
+  },
 ]);
