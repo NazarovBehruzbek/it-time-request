@@ -17,6 +17,16 @@ function RequestPage() {
   const sheetUrl =
     "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
 
+  const now = new Date();
+const formattedTime = now.toLocaleString("uz-UZ", {
+  timeZone: "Asia/Tashkent",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+  
   const onChange = (e) => {
     setValue(e.target.value);
   };
@@ -87,7 +97,7 @@ function RequestPage() {
       const timeSlotsText = selectedTimeSlots.join(", ");
       const messageContent = `${
         value === 1 ? "#offline" : "#online"
-      } \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+      } \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}\n⏰ Yuborilgan vaqt: ${formattedTime}`;
       const formData = {
         name: name,
         username: username,
