@@ -88,37 +88,36 @@ function NewFormRequest() {
         "https://script.google.com/macros/s/AKfycbwwImUqB-q5wdC_1vZP4faotEFDi8XW2CxKlRWgMrJtNLyt3iebycVeGQzVO4Xnuk8tlg/exec";
 
       const timeSlotsText = selectedTimeSlots.join(", ");
-      const messageContent = `${
-        value === 1 ? "#offline" : "#online"
-      } \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+      const messageContent = `${value === 1 ? "#offline" : "#online"
+        } \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
 
-    const formData = {
-      name: name, // formadagi ism
-      username: username, // Telegram yoki foydalanuvchi nomi
-      phone: phone, // telefon raqami
-      timeSlots: timeSlotsText, // tanlangan vaqt
-      value: value === 1 ? "#offline" : "#online", // formatlash
-    };
+      const formData = {
+        name: name, // formadagi ism
+        username: username, // Telegram yoki foydalanuvchi nomi
+        phone: phone, // telefon raqami
+        timeSlots: timeSlotsText, // tanlangan vaqt
+        value: value === 1 ? "#offline" : "#online", // formatlash
+      };
 
-    fetch(sheetUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: `data=${encodeURIComponent(JSON.stringify(formData))}`,
-    })
-      .then((res) => res.text())
-      .then((data) => {
-        console.log("✅ Sent:", data);
+      fetch(sheetUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `data=${encodeURIComponent(JSON.stringify(formData))}`,
       })
-      .catch((err) => {
-        console.error("❌ Error:", err);
-      });
+        .then((res) => res.text())
+        .then((data) => {
+          console.log("✅ Sent:", data);
+        })
+        .catch((err) => {
+          console.error("❌ Error:", err);
+        });
 
 
-   
 
-     
+
+
 
       axios({
         url: url,
@@ -166,122 +165,134 @@ function NewFormRequest() {
           bodyStyle={{
             height: "100vh",
             display: "flex",
-            flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             background: "linear-gradient(135deg, #1a237e 0%, #0d47a1 100%)",
+            padding: "1rem",
           }}
         >
           <div
             style={{
               textAlign: "center",
-              marginBottom: "2rem",
               width: "100%",
               maxWidth: "800px",
-              padding: "20px",
               color: "white",
+              padding: "1rem",
             }}
           >
-            <h1
-              style={{
-                fontSize: "clamp(1.8rem, 4vw, 3rem)",
-                marginBottom: "1.5rem",
-                fontWeight: "bold",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-              }}
-            >
-              IT kurslariga ro'yhatdan o'ting!
-            </h1>
             <p
               style={{
-                fontSize: "clamp(1rem, 2vw, 1.4rem)",
-                marginBottom: "3rem",
+                fontSize: "clamp(1.3rem, 2.5vw, 2rem)",
+                marginBottom: "2.5rem",
                 lineHeight: "1.6",
-                opacity: "0.9",
+                fontWeight: 500,
               }}
             >
-              Tezda boshlamoqchi bo'lganlar uchun eng qulay imkoniyat! <br />
-              Bizda yangi guruhlarga qabul boshlandi. <br />
-              Kurslarimiz offlayn tarzda va faqat Toshkent shahrida bo'ladi
+              Kurslarimiz{" "}
+              <strong
+                style={{
+                  backgroundColor: "#fff",
+                  color: "#d60000",
+                  padding: "4px 8px",
+                  borderRadius: "5px",
+                  textShadow: "1px 1px 3px rgba(0,0,0,0.4)",
+                  marginRight: "4px",
+                  display: "inline-block",
+                }}
+              >
+                Toshkent shahri
+              </strong>
+              ,
+              <strong
+                style={{
+                  backgroundColor: "#fff",
+                  color: "#0070f3",
+                  padding: "4px 8px",
+                  borderRadius: "5px",
+                  textShadow: "1px 1px 3px rgba(0,0,0,0.4)",
+                  marginLeft: "4px",
+                  marginTop: "10px",
+                  display: "inline-block",
+                }}
+              >
+                Bodomzor metro bekati
+              </strong>{" "}
+              ro‘parasida bo‘lib o‘tadi. Aniq qatnasha olasizmi?
             </p>
+
             <div
               style={{
                 display: "flex",
-                gap: "clamp(1rem, 3vw, 2rem)",
-                justifyContent: "center",
-                flexWrap: "wrap",
+                flexDirection: "column",
+                gap: "1.5rem",
+                alignItems: "center",
               }}
             >
-              <Button
-                size="large"
+              <button
                 onClick={handleOnlineClick}
                 style={{
-                  minWidth: "200px",
-                  height: "50px",
-                  fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
-                  fontWeight: "bold",
-                  background: "rgba(255, 0, 0, 0.619)",
+                  width: "90%",
+                  maxWidth: "300px",
+                  height: "55px",
+                  fontSize: "1rem",
+                  fontWeight: "600",
+                  background: "#ff4d4f",
                   border: "none",
-                  borderRadius: "25px",
+                  borderRadius: "30px",
+                  color: "#fff",
                   boxShadow: "0 4px 15px rgba(255, 0, 0, 0.3)",
+                  cursor: "pointer",
                   transition: "all 0.3s ease",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "10px",
-                  color: "white",
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.8)";
+                  e.currentTarget.style.background = "#ff1a1a";
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.619)";
+                  e.currentTarget.style.background = "#ff4d4f";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                Onlayn
-              </Button>
-              <Button
-                size="large"
+                Yo‘q, faqat onlayn kerak
+              </button>
+
+              <button
                 onClick={handleOfflineClick}
                 style={{
-                  minWidth: "200px",
-                  height: "50px",
-                  fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
-                  fontWeight: "bold",
-                  background: "rgba(255, 0, 0, 0.619)",
+                  width: "90%",
+                  maxWidth: "300px",
+                  height: "55px",
+                  fontSize: "1rem",
+                  fontWeight: "600",
+                  background: "#4caf50",
                   border: "none",
-                  borderRadius: "25px",
-                  boxShadow: "0 4px 15px rgba(255, 0, 0, 0.3)",
+                  borderRadius: "30px",
+                  color: "#fff",
+                  boxShadow: "0 4px 15px rgba(76, 175, 80, 0.3)",
+                  cursor: "pointer",
                   transition: "all 0.3s ease",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  margin: "10px",
-                  color: "white",
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.8)";
+                  e.currentTarget.style.background = "#388e3c";
                   e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.background = "rgba(255, 0, 0, 0.619)";
+                  e.currentTarget.style.background = "#4caf50";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                Offlayn
-              </Button>
+                Ha, bora olaman
+              </button>
             </div>
           </div>
         </Modal>
+
       ) : (
         <>
           <header className="header">
             <img src={logo} alt="IT TIME Academy" className="logo" />
             <p className="header-title">
-              Bizning manzil <strong>Toshkent</strong> shahrida Bodomzor metro
+              Bizning manzil <strong style={{ textShadow: "1px 1px 1px red" }}>Toshkent shahri Bodomzor metro </strong>
               ro'parasida joylashgan kela olsangiz formani to'ldiring
             </p>
           </header>
