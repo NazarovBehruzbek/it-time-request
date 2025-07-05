@@ -14,9 +14,6 @@ function NewFormRequest() {
   const [value, setValue] = useState(1);
   const [announcementModal, setAnnouncementModal] = useState(true);
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
-  const sheetUrl =
-    "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
-
   const onChange = (e) => {
     setValue(e.target.value);
   };
@@ -89,14 +86,14 @@ function NewFormRequest() {
 
       const timeSlotsText = selectedTimeSlots.join(", ");
       const messageContent = `${value === 1 ? "#offline" : "#online"
-        } \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+        } \n#IT_kids \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
 
       const formData = {
         name: name, // formadagi ism
         username: username, // Telegram yoki foydalanuvchi nomi
         phone: phone, // telefon raqami
         timeSlots: timeSlotsText, // tanlangan vaqt
-        value: value === 1 ? "#offline" : "#online", // formatlash
+        value: value === 1 ? "#offline_kids" : "#online_kids", // formatlash
       };
 
       fetch(sheetUrl, {
