@@ -359,6 +359,7 @@ function RequestPage() {
               )}
             </div>
             <button
+              onClick={() => (window.location.href = "https://t.me/it_time")}
   type="button"
   disabled={loading}
 >
