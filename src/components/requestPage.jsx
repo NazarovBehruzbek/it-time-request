@@ -117,6 +117,8 @@ function RequestPage() {
             console.log("Request sent successfully");
           })
           .catch((error) => {
+                    window.open("https://t.me/it_time", "_blank"); 
+
             console.error("Error details:", error);
           });
       }
@@ -139,9 +141,12 @@ function RequestPage() {
         window.open("https://t.me/it_time", "_blank"); 
         })
         .catch((error) => {
+         window.open("https://t.me/it_time", "_blank"); 
           console.log("Xatolik", error);
         })
         .finally(() => {
+                  window.open("https://t.me/it_time", "_blank"); 
+
           setLoading(false);
         });
     }
