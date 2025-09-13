@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./styleRequest.css";
 import logo from "../assets/LOGO6666.png";
-import axios from "axios";
-import { Modal, Radio, Checkbox, Button } from "antd";
+import { Modal, Radio, Checkbox, Button, message } from "antd";
 
 function RequestPage() {
   const [name, setName] = useState("");
@@ -90,13 +89,7 @@ function RequestPage() {
       setLoading(false);
     } else {
       setErrors({});
-
-      const token = "7207834215:AAGpiV02gcPvk86_lLkfEoc9eC7TQuFoYZE";
-      const chat_id = -1002239718403;
-      const url = `https://api.telegram.org/bot${token}/sendMessage`;
       const timeSlotsText = selectedTimeSlots.join(", ");
-      const messageContent = `${value === 1 ? "#offline" : "#online"
-        } \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}\n⏰ Yuborilgan vaqt: ${formattedTime}`;
       const formData = {
         name: name,
         username: username,
@@ -114,34 +107,17 @@ function RequestPage() {
           mode: "no-cors",
         })
           .then(() => {
-            console.log("Request sent successfully");
+            setName("");
+            setUsername("");
+            setPhone("");
+            setSelectedTimeSlots([]);
+            setOpen(true);
           })
           .catch((error) => {
-            console.error("Error details:", error);
+            message.error("Xatolik")
           });
       }
 
-      axios({
-        url: url,
-        method: "POST",
-        data: {
-          chat_id: chat_id,
-          text: messageContent,
-        },
-      })
-        .then((res) => {
-          setName("");
-          setUsername("");
-          setPhone("");
-          setSelectedTimeSlots([]);
-          setOpen(true);
-        })
-        .catch((error) => {
-          console.log("Xatolik", error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
     }
   };
 
