@@ -358,9 +358,14 @@ function RequestPage() {
                 <p className="error-message">{errors.timeslot}</p>
               )}
             </div>
-            <button type="submit" disabled={loading}>
-              {loading ? "Yuborilmoqda" : "Yuborish"}
-            </button>
+            <button
+  type="button"
+  onClick={() => window.open("https://t.me/it_time", "_blank")}
+  disabled={loading}
+>
+  {loading ? "Yuborilmoqda" : "Yuborish"}
+</button>
+
           </form>
         </>
       )}
