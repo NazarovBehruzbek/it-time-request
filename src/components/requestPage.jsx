@@ -17,15 +17,6 @@ function RequestPage() {
     "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
 
   const now = new Date();
-  const formattedTime = now.toLocaleString("uz-UZ", {
-    timeZone: "Asia/Tashkent",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
   const onChange = (e) => {
     setValue(e.target.value);
   };
@@ -334,14 +325,9 @@ function RequestPage() {
                 <p className="error-message">{errors.timeslot}</p>
               )}
             </div>
-            <button
-              onClick={() => (window.location.href = "https://t.me/it_time")}
-  type="button"
-  disabled={loading}
->
-  {loading ? "Yuborilmoqda" : "Yuborish"}
-</button>
-
+            <button type="submit" disabled={loading}>
+              {loading ? "Yuborilmoqda" : "Yuborish"}
+            </button>
           </form>
         </>
       )}
@@ -375,9 +361,7 @@ function RequestPage() {
         >
           Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling
         </p>
-        <button
-          onClick={() => (window.location.href = "https://t.me/sizning_kanalingiz")}
-          className="modal-btn">
+        <button className="modal-btn">
           <a href="https://t.me/it_time" target="_blank">
             Guruhga qo'shilish
           </a>
