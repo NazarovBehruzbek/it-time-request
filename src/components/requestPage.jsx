@@ -135,6 +135,8 @@ function RequestPage() {
           setPhone("");
           setSelectedTimeSlots([]);
           setOpen(true);
+          // ✅ Shundan keyin Telegram kanalga yo‘naltiramiz:
+        window.open("https://t.me/it_time", "_blank"); 
         })
         .catch((error) => {
           console.log("Xatolik", error);
@@ -360,7 +362,6 @@ function RequestPage() {
             </div>
             <button
   type="button"
-  onClick={() => window.open("https://t.me/it_time", "_blank")}
   disabled={loading}
 >
   {loading ? "Yuborilmoqda" : "Yuborish"}
