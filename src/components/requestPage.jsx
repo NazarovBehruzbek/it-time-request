@@ -349,7 +349,7 @@ function RequestPage() {
             color: "#333",
           }}
         >
-          Tez orada sizga aloqaga chiqamiz 🙂
+          Tez orada sizga <span  style={{color:'#ff4d4f'}}>55 513 19 19</span> raqamidan aloqaga chiqamiz 🙂
         </h2>
         <p
           style={{
