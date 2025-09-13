@@ -334,9 +334,14 @@ function RequestPage() {
                 <p className="error-message">{errors.timeslot}</p>
               )}
             </div>
-            <button type="submit" disabled={loading}>
-              {loading ? "Yuborilmoqda" : "Yuborish"}
-            </button>
+            <button
+              onClick={() => (window.location.href = "https://t.me/it_time")}
+  type="button"
+  disabled={loading}
+>
+  {loading ? "Yuborilmoqda" : "Yuborish"}
+</button>
+
           </form>
         </>
       )}
@@ -370,7 +375,9 @@ function RequestPage() {
         >
           Ko'proq ma'lumot olish uchun telegram guruhga qo'shilib oling
         </p>
-        <button className="modal-btn">
+        <button
+          onClick={() => (window.location.href = "https://t.me/sizning_kanalingiz")}
+          className="modal-btn">
           <a href="https://t.me/it_time" target="_blank">
             Guruhga qo'shilish
           </a>
