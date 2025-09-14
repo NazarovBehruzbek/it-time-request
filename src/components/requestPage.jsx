@@ -91,13 +91,14 @@ function RequestPage() {
 
       const params = new URLSearchParams(formData).toString();
       const urlWithParams = `${sheetUrl}?${params}`;
-
+      setOpen(true);
       if (value === 1) {
         fetch(urlWithParams, {
           method: "GET",
           mode: "no-cors",
         })
           .then(() => {
+            setLoading(false);
             setName("");
             setUsername("");
             setPhone("");
@@ -349,7 +350,7 @@ function RequestPage() {
             color: "#333",
           }}
         >
-          Tez orada sizga <span  style={{color:'#ff4d4f'}}>55 513 19 19</span> raqamidan aloqaga chiqamiz 🙂
+          Tez orada sizga <span style={{ color: '#ff4d4f' }}>55 513 19 19</span> raqamidan aloqaga chiqamiz 🙂
         </h2>
         <p
           style={{
