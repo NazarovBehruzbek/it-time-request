@@ -4,7 +4,7 @@ import logo from "../assets/LOGO6666.png";
 import axios from "axios";
 import { Modal, Radio, Checkbox, Button } from "antd";
 
-function NewFormRequest() {
+function RequestPage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+998");
   const [username, setUsername] = useState("");
@@ -83,7 +83,6 @@ function NewFormRequest() {
       const url = `https://api.telegram.org/bot${token}/sendMessage`;
       const sheetUrl =
       "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
-  
 
       const timeSlotsText = selectedTimeSlots.join(", ");
       const messageContent = `${value === 1 ? "#offline" : "#online"
@@ -94,7 +93,7 @@ function NewFormRequest() {
         username: username, // Telegram yoki foydalanuvchi nomi
         phone: phone, // telefon raqami
         timeSlots: timeSlotsText, // tanlangan vaqt
-        value: value === 1 ? "#offline_kids" : "#online_kids", // formatlash
+        value: value === 1 ? "#offline" : "#online", // formatlash
       };
 
       fetch(sheetUrl, {
@@ -401,4 +400,4 @@ function NewFormRequest() {
   );
 }
 
-export default NewFormRequest;
+export default RequestPage;
