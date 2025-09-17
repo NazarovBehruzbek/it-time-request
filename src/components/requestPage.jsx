@@ -82,7 +82,7 @@ function RequestPage() {
       const chat_id = -1002239718403;
       const url = `https://api.telegram.org/bot${token}/sendMessage`;
       const sheetUrl =
-      "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
+        "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
 
       const timeSlotsText = selectedTimeSlots.join(", ");
       const messageContent = `${value === 1 ? "#offline" : "#online"
@@ -96,26 +96,19 @@ function RequestPage() {
         value: value === 1 ? "#offline" : "#online", // formatlash
       };
 
-      
-      fetch(sheetUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `data=${encodeURIComponent(JSON.stringify(formData))}`,
+      const params = new URLSearchParams(formData).toString();
+      const urlWithParams = `${sheetUrl}?${params}`;
+
+      fetch(urlWithParams, {
+        method: "GET",
+        mode: "no-cors",
       })
-        .then((res) => res.text())
-        .then((data) => {
-          console.log("✅ Sent:", data);
+        .then(() => {
+          console.log("Request sent successfully");
         })
-        .catch((err) => {
-          console.error("❌ Error:", err);
+        .catch((error) => {
+          console.error("Error details:", error);
         });
-
-
-
-
-
 
       axios({
         url: url,
