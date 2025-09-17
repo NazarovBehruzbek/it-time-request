@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./styleRequest.css";
 import logo from "../assets/LOGO6666.png";
-import { Modal, Radio, Checkbox, Button, message } from "antd";
+import axios from "axios";
+import { Modal, Radio, Checkbox, Button } from "antd";
 
 function RequestPage() {
   const [name, setName] = useState("");
@@ -13,10 +14,6 @@ function RequestPage() {
   const [value, setValue] = useState(1);
   const [announcementModal, setAnnouncementModal] = useState(true);
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
-  const sheetUrl =
-    "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
-
-  const now = new Date();
   const onChange = (e) => {
     setValue(e.target.value);
   };
@@ -80,36 +77,66 @@ function RequestPage() {
       setLoading(false);
     } else {
       setErrors({});
+
+      const token = "7207834215:AAGpiV02gcPvk86_lLkfEoc9eC7TQuFoYZE";
+      const chat_id = -1002239718403;
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+      const sheetUrl =
+      "https://script.google.com/macros/s/AKfycbwnCdEwl8R-QmtLqV5IcR1LHMb15G30SXgsaTwooJYX2xp3x4LMDBohCiyd_61s9Aqg/exec";
+
       const timeSlotsText = selectedTimeSlots.join(", ");
+      const messageContent = `${value === 1 ? "#offline" : "#online"
+        } \n#IT \nIsmi: ${name} \nUsername: ${username} \nTelefon: ${phone} \nTanlangan vaqt oralig'lari: ${timeSlotsText}`;
+
       const formData = {
-        name: name,
-        username: username,
-        phone: phone,
-        timeSlots: timeSlotsText,
-        value: value === 1 ? "#offline" : "#online",
+        name: name, // formadagi ism
+        username: username, // Telegram yoki foydalanuvchi nomi
+        phone: phone, // telefon raqami
+        timeSlots: timeSlotsText, // tanlangan vaqt
+        value: value === 1 ? "#offline" : "#online", // formatlash
       };
 
-      const params = new URLSearchParams(formData).toString();
-      const urlWithParams = `${sheetUrl}?${params}`;
-      setOpen(true);
-      if (value === 1) {
-        fetch(urlWithParams, {
-          method: "GET",
-          mode: "no-cors",
+      fetch(sheetUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `data=${encodeURIComponent(JSON.stringify(formData))}`,
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          console.log("✅ Sent:", data);
         })
-          .then(() => {
-            setLoading(false);
-            setName("");
-            setUsername("");
-            setPhone("");
-            setSelectedTimeSlots([]);
-            setOpen(true);
-          })
-          .catch((error) => {
-            message.error("Xatolik")
-          });
-      }
+        .catch((err) => {
+          console.error("❌ Error:", err);
+        });
 
+
+
+
+
+
+      axios({
+        url: url,
+        method: "POST",
+        data: {
+          chat_id: chat_id,
+          text: messageContent,
+        },
+      })
+        .then((res) => {
+          setName("");
+          setUsername("");
+          setPhone("");
+          setSelectedTimeSlots([]);
+          setOpen(true);
+        })
+        .catch((error) => {
+          console.log("Xatolik", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -256,6 +283,7 @@ function RequestPage() {
             </div>
           </div>
         </Modal>
+
       ) : (
         <>
           <header className="header">
@@ -350,7 +378,7 @@ function RequestPage() {
             color: "#333",
           }}
         >
-          Tez orada sizga <span style={{ color: '#ff4d4f' }}>55 513 19 19</span> raqamidan aloqaga chiqamiz 🙂
+          Tez orada sizga aloqaga chiqamiz 🙂
         </h2>
         <p
           style={{
